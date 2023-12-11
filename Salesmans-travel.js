@@ -46,3 +46,17 @@ function travel(r, zipcode) {
 }
 
 // or
+
+function travel(r, zipcode) {
+  const array = r.split(',');
+  const matchedResults = array.filter(e => e.split(' ').slice(-2).join(' ') === zipcode);
+  
+  if (!matchedResults.length) {
+    return zipcode + ':/';
+  }
+  
+  const houses = matchedResults.map(e => e.split(' ')[0]).join(',');
+  const streetAndTown = matchedResults.map(e => e.split(' ').slice(1, -2).join(' ')).join(',');
+  
+  return `${zipcode}:${streetAndTown}/${houses}`;
+}
